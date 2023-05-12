@@ -1,0 +1,37 @@
+class Solution {
+public:
+    vector<vector<int>> generateMatrix(int n) {
+        vector<vector<int>>ans(n,vector<int>(n));
+        int topRow=0;
+        int leftCol=0;
+        int rightCol=n-1;
+        int bottomRow=n-1;
+        int count=1;
+        while(topRow<=bottomRow && leftCol<=rightCol){
+            // for starting row
+            for(int i=leftCol;i<=rightCol;i++){ 
+                ans[topRow][i]=count++;
+            }
+            topRow++;
+
+            // for right column
+            for(int i=topRow;i<=bottomRow;i++){
+                ans[i][rightCol]=count++;
+            }
+            rightCol--;
+
+            // for ending row
+            for(int i=rightCol;i>=leftCol; i--){
+                ans[bottomRow][i]=count++;
+            }
+            bottomRow--;
+            
+            // for starting column
+            for(int i=bottomRow;i>=topRow; i--){
+                ans[i][leftCol]=count++;
+            }
+            leftCol++;
+        }
+        return ans;   
+    }
+};
