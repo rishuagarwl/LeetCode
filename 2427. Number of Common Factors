@@ -1,0 +1,13 @@
+class Solution {
+public:
+    int commonFactors(int a, int b) {
+        int k=0;
+        int s= min(a,b);
+        for(int i=1; i<=s; i++){
+            if(a%i==0 && b%i==0){
+                k++;
+            }
+        }
+        return k;
+    }
+};
