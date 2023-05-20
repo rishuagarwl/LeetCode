@@ -1,0 +1,29 @@
+class Solution {
+    private: 
+    long long maxPoint(vector<vector<int>>& questions, int i, long* dp){
+         // base case
+        if(i>=questions.size()){
+            return 0;
+        }
+        if(dp[i]!=0){
+            return dp[i];
+        }
+        int points= questions[i][0];
+        int jump= questions[i][1];
+        
+        long long solve = points+ maxPoint(questions, i+jump+1, dp);
+        long long skipped= maxPoint(questions, i+1, dp);
+        long long ans = max(solve, skipped);
+        dp[i]=ans;
+        return ans;
+    }
+public:
+    long long mostPoints(vector<vector<int>>& questions) {
+        int n= questions.size();
+        long* dp= new long[n];
+        for(int i=0; i<n; i++){
+            dp[i]=0;
+        }
+        return maxPoint(questions, 0, dp);
+    }
+};
