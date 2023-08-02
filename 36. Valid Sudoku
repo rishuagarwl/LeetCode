@@ -1,0 +1,25 @@
+class Solution {
+public:
+    bool isValidSudoku(vector<vector<char>>& board) {
+        vector<unordered_map<char,int>>row(9);
+        vector<unordered_map<char,int>>column(9);
+        vector<unordered_map<char,int>>block(9);
+
+        for(int i=0; i<9; i++){
+            for(int j=0; j<9; j++){
+               if(board[i][j]!='.'){   
+                    row[i][board[i][j]]++;      //row 
+                    column[j][board[i][j]]++;    //column  
+                    block[((i/3)*3+j/3)][board[i][j]]++;  //grid
+                    int number = board[i][j];
+                    
+                    if(row[i][number]>1 || column[j][number] >1 || 
+                    block[((i/3)*3 + j/3)][number] >1){
+                        return false;
+                    }  
+               } 
+            }
+        }
+        return true;    
+    }
+};
