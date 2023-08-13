@@ -1,0 +1,20 @@
+class Solution {
+public:
+    int maxSum(vector<vector<int>>& grid) {
+        int maxSum = 0;
+        int row= grid.size();
+        int col= grid[0].size();
+        for(int i=0; i< row-2; i++){
+            for(int j=0; j<col -2; j++){
+                int sum=0;
+                for(int c=j; c<j+3;c++){
+                    sum+= grid[i][c];
+                    sum+=grid[i+2][c];
+                }
+                sum+=grid[i+1][j+1];
+                maxSum= max(maxSum, sum);
+            }
+        }
+        return maxSum;  
+    }
+};
