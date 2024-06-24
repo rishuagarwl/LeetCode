@@ -1,0 +1,21 @@
+class Solution {
+public:
+    int minKBitFlips(vector<int>& nums, int k) {
+        int n = nums.size();
+        vector<int>flipCnt(n,0);
+        int flips=0, cnt=0;
+        for(int i=0;i<n;i++){
+            if(i>=k)
+                flips ^=flipCnt[i-k];
+            if(flips == nums[i]){
+                if(i+k>n){
+                    return -1;
+                }
+                flipCnt[i]=1;
+                flips^=1;
+                cnt++;
+            }
+        }
+        return cnt;
+    }
+};
