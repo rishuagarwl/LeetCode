@@ -1,0 +1,16 @@
+class Solution {
+public:
+    long long maximumImportance(int n, vector<vector<int>>& roads) {
+        long sum=0, cost=1;
+        vector<int>connection(n,0);
+        for(auto road:roads){
+            connection[road[0]]++;
+            connection[road[1]]++;
+        }
+        sort(connection.begin(), connection.end());
+        for(auto conn:connection){
+            sum+=conn*(cost++);
+        }
+        return sum;
+    }
+};
