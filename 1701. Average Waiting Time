@@ -1,0 +1,18 @@
+class Solution {
+public:
+    double averageWaitingTime(vector<vector<int>>& customers) {
+        double waiting_time =0;
+        int curr_time =0;
+        for(auto customer : customers){
+            int arrival = customer[0];
+            int service = customer[1];
+            if(arrival > curr_time){
+                curr_time = arrival;
+            }
+            int waiting = (curr_time +service) - arrival;
+            waiting_time+=waiting;
+            curr_time += service;
+        }
+        return waiting_time/customers.size();
+    }
+};
