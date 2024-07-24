@@ -1,0 +1,26 @@
+class Solution {
+public:
+    vector<int> sortJumbled(vector<int>& mapping, vector<int>& nums) {
+        int n = nums.size();
+        vector<pair<int,int>> mp(n);
+        for(int i=0;i<n;i++){
+            int originalNum = nums[i];
+            int mappedNum = originalNum ==0 ? mapping[0]:0;
+            int prod=1;
+
+            while(originalNum>0){
+                int digit = originalNum%10;
+                mappedNum += prod * mapping[digit];
+                originalNum/=10;
+                prod *=10;
+            }
+            mp[i] = {mappedNum,i};
+        }
+        sort(mp.begin(), mp.end());
+        vector<int>result;
+        for(auto it:mp){
+            result.push_back(nums[it.second]);
+        }
+        return result;
+    }
+};
