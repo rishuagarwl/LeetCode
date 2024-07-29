@@ -1,0 +1,23 @@
+class Solution {
+public:
+    int numTeams(vector<int>& rating) {
+        int cnt=0;
+        for(int i=0;i<rating.size();i++){
+            int right_less =0;
+            int right_more =0;
+
+            for(int j=i+1;j<rating.size();j++){
+                if(rating[j] < rating[i]) right_less++;
+                else if(rating[j] > rating[i]) right_more++;
+            }
+            int left_less = 0;
+            int left_more = 0;
+            for(int k=0; k<i; k++){
+                if(rating[i]>rating[k]) left_less++;
+                else if (rating[i]<rating[k]) left_more++;
+            }
+            cnt+= right_more * left_less + right_less*left_more;
+        }
+        return cnt;
+    }
+};
