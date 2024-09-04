@@ -1,0 +1,38 @@
+class Solution {
+public:
+    int robotSim(vector<int>& commands, vector<vector<int>>& obstacles) {
+        //directions- west, north, east, south
+        vector<pair<int, int>> direction = {{-1, 0}, {0,1}, {1,0}, {0,-1}};
+
+        int x=0, y=0, dir=1, maxDist =0;
+
+        set<pair<int, int>>obs;
+        for(auto it: obstacles){
+            obs.insert({it[0], it[1]});
+        }
+
+        for(auto i:commands){
+            if(i==-1){
+                dir = (dir+1)%4;
+            }
+            else if(i==-2){
+                dir = (dir-1+4)%4;
+            }
+            else{
+                for(int cnt=0; cnt<i;cnt++){
+                    int newX = x+direction[dir].first;
+                    int newY = y+direction[dir].second;
+
+                    if(obs.count({newX, newY})>0){
+                        break;
+                    }
+                    x=newX;
+                    y=newY;
+
+                    maxDist = max(maxDist, x*x+y*y);
+                }
+            }
+        }
+        return maxDist;
+    }
+};
