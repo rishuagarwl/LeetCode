@@ -1,0 +1,25 @@
+class Solution {
+public:
+    vector<int> missingRolls(vector<int>& rolls, int mean, int n) {
+        int m = rolls.size();
+        int total = (n+m)*mean;
+        int rolls_sum = 0;
+        for(auto it:rolls){
+            rolls_sum+=it;
+        }
+        int miss = total - rolls_sum;
+
+        if(miss>6*n || miss<n) return {};
+        vector<int>ans(n,1);
+        miss-=n;
+
+        for(int i=0;i<n;i++){
+            if(miss<=0){
+                break;
+            }
+            ans[i] += min(5, miss);
+            miss-= min(5, miss);      
+        }
+        return ans;
+    }
+};
